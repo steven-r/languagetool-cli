@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-12-05)
+
+
+### Bug Fixes
+
+* enable reviewdog compliant output ([c5f2115](https://github.com/steven-r/languagetool-cli/commit/c5f2115e2651c33b80be3726e183ccd983b2c6a1)), closes [#5](https://github.com/steven-r/languagetool-cli/issues/5)
+
 # 1.0.0-beta.1 (2022-12-05)
 
 
