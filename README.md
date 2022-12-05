@@ -22,8 +22,9 @@ Options:
   --disabled-rules <rules...>
   --enabled-categories <categories...>
   --disabled-categories <categories...>
-  --onlyEnabled                          Nur eingeschaltete Prüfungen nutzen (default: false)
-  -r, --rule-config <files...>
+  --only-enabled                         Nur eingeschaltete Prüfungen nutzen (default: false)
+  -r, --rule-config <files...>           Rule file
+  --output-format 'pretty'|'vim'|'reviewdog' Output format (default: 'pretty')
   -l, --language                         Sprache
   -m, --mother-Tongue                    Muttersprache
   -h, --help                             display help for command
@@ -52,6 +53,7 @@ Enables/disables rules given by rule-id.
 
 Enables/disables rules given by rule-id.
 
+### --output-format
 ## Line and file inline comments
 
 ```html

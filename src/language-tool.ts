@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node-esm
 
 import axios from "axios";
-import { Command } from "commander";
+import { Command, Option } from "commander";
 import { findUpSync } from "find-up";
 import fs from "fs";
 import { TransformableInfo } from "logform";
@@ -12,6 +12,7 @@ import { location, Point } from "vfile-location";
 import { reporter } from "vfile-reporter";
 import { createLogger, format, transports } from "winston";
 import * as annotationBuilder from "./annotation-builder.js";
+import { VimReporter } from "./vim-reporter.js";
 import {
   IAnnotationBuilderOptions,
   ILanguageToolMatch,
@@ -22,6 +23,7 @@ const myformat = format.combine(
   format.colorize(),
   format.timestamp(),
   format.align(),
+  format.splat(),
   format.printf((info: TransformableInfo) => {
     const { timestamp, level, message, ...args } = info;
 
@@ -40,6 +42,7 @@ let argv: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let options:  any;
 let verbose = false;
+let outputChannel: (vfile: VFile|VFile[]) => string = reporter;
 
 const logger = createLogger({
   transports: [
@@ -49,11 +52,6 @@ const logger = createLogger({
     }),
   ],
 });
-
-logger.info("Rechtschreib- und Grammatik-Prüfung");
-if (argv) {
-  logger.debug(`They're ${argv.args.length} files to be processed.`);
-}
 
 const remarkBuilderOptions: IAnnotationBuilderOptions =
   annotationBuilder.defaults;
@@ -75,7 +73,7 @@ if (!areWeTestingWithJest()) {
 }
 
 export function processFile(fileName: string) {
-  logger.info("Proessing " + fileName);
+  logger.debug("Processing " + fileName);
   const fileContents = fs.readFileSync(fileName, { encoding: "utf8" });
   const annotatedMarkdown: string = JSON.stringify(
     annotationBuilder.build(fileContents, remarkBuilderOptions)
@@ -105,16 +103,17 @@ export function processFile(fileName: string) {
 function parseCommandLine(commandLine?: string[]) {
   const program = new Command();
   program
-    .argument("[files...]", "Eingabedateien")
+    .argument("[files...]", "Input files")
     .option("-v, --verbose", "Debug output", false)
     .option("--enabled-rules <rules...>")
     .option("--disabled-rules <rules...>")
     .option("--enabled-categories <categories...>")
     .option("--disabled-categories <categories...>")
-    .option("--onlyEnabled", "Nur eingeschaltete Prüfungen nutzen", false)
+    .option("--only-enabled", "Use enabled rules only", false)
     .option("-r, --rule-config <files...>")
-    .option("-l, --language", "Sprache", "de-DE")
-    .option("-m, --mother-Tongue", "Muttersprache");
+    .addOption(new Option("--output-format <format>", 'Output format').choices(['pretty', 'vim', 'reviewdog']).default('pretty'))
+    .option("-l, --language <language>", "Sprache", "auto")
+    .option("-m, --mother-tongue <mother-tongue>", "Mother tongue");
 
   const argv = program.parse(commandLine ?? process.argv);
   return argv;
@@ -231,7 +230,7 @@ export function processResponse(
       vfile.message(message, point, match.rule.id);
     }
   });
-  console.log(reporter(vfile));
+  console.log(outputChannel(vfile));
 }
 
 export function isEnabled(
@@ -370,6 +369,9 @@ function mainline() {
   argv = parseCommandLine();
   options = argv.optsWithGlobals();
   verbose = options.verbose;
+  if (options.outputFormat !== 'pretty') {
+    outputChannel = VimReporter;
+  }
   body = buildBody(options);
   if (options.ruleConfig) {
     options.ruleConfig.forEach((filename: string) => {
