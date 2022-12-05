@@ -19,10 +19,10 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install
+        run: yarn 
 
       - name: Build package
-        run: npm run build
+        run: yarn run build
 
       - name: Release
         env:
