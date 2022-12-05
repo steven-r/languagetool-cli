@@ -2,15 +2,18 @@
   "name": "languagetool-cli",
   "version": "0.0.0-development",
   "description": "Command line tool to check for spelling errors in documents",
-  "type": "module",
   "main": "dist/language-tool.js",
+  "bin": {
+    "language-tool": "dist/language-tool.js"
+  },
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "semantic-release": "semantic-release",
     "prepare": "is-ci || husky install",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "jest"
+    "test": "vitest"
   },
   "repository": "git+https://github.com/steven-r/mybook.git",
   "author": "Stephen Reindl <stephen.reindl@outlook.de>",
@@ -39,7 +42,8 @@
     "is-ci": "^3.0.1",
     "prettier": "^2.8.0",
     "semantic-release": "^19.0.5",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "vitest": "^0.25.3"
   },
   "dependencies": {
     "annotatedtext": "^1.1.2",

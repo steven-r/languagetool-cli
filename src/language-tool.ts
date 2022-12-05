@@ -1,7 +1,6 @@
 #!/usr/bin/env ts-node-esm
 
 import axios from "axios";
-import "axios-debug-log";
 import { Command } from "commander";
 import { findUpSync } from "find-up";
 import fs from "fs";
@@ -18,21 +17,6 @@ import {
   ILanguageToolMatch,
   ILanguageToolRequest,
 } from "./interfaces";
-
-const program = new Command();
-program
-  .argument("<files...>", "Eingabedateien")
-  .option("-v, --verbose", "Debug output", false)
-  .option("--enabled-rules <rules...>")
-  .option("--disabled-rules <rules...>")
-  .option("--enabled-categories <categories...>")
-  .option("--disabled-categories <categories...>")
-  .option("--onlyEnabled", "Nur eingeschaltete Prüfungen nutzen", false)
-  .option("-r, --rule-config <files...>")
-  .option("-l, --language", "Sprache", "de-DE")
-  .option("-m, --mother-Tongue", "Muttersprache");
-
-const argv = program.parse();
 
 const myformat = format.combine(
   format.colorize(),
@@ -51,17 +35,25 @@ const instance = axios.create({
   baseURL: "http://localhost:8081/v2/check",
 });
 
-const options = argv.optsWithGlobals();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let argv: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let options:  any;
+let verbose = false;
+
 const logger = createLogger({
   transports: [
     new transports.Console({
-      level: options.verbose ? "debug" : "info",
+      level: verbose ? "debug" : "info",
       format: myformat,
     }),
   ],
 });
+
 logger.info("Rechtschreib- und Grammatik-Prüfung");
-logger.debug(`They're ${argv.args.length} files to be processed.`);
+if (argv) {
+  logger.debug(`They're ${argv.args.length} files to be processed.`);
+}
 
 const remarkBuilderOptions: IAnnotationBuilderOptions =
   annotationBuilder.defaults;
@@ -75,21 +67,14 @@ const inlineCommentRuleRe = /\s*([A-Z_0-9]+)(\((.+?)\))?/gi;
 let enabledRules: Record<string, boolean> = {};
 let enabledRulesPerLineNumber: Record<number, Record<string, boolean>> = {};
 
-const body = buildBody(argv.opts());
 let globalRules: Record<string, boolean> = {};
 
-if (options.ruleConfig) {
-  options.ruleConfig.forEach((filename: string) => {
-    if (!fs.existsSync(filename)) {
-      logger.warn(`Regeldatei ${filename} nicht gefunden`);
-      return;
-    }
-    handleConfigureFile("", filename, filename);
-    globalRules = Object.assign(enabledRules, globalRules);
-  });
+let body: ILanguageToolRequest;
+if (!areWeTestingWithJest()) {
+  mainline();
 }
 
-argv.args.forEach((fileName: string) => {
+export function processFile(fileName: string) {
   logger.info("Proessing " + fileName);
   const fileContents = fs.readFileSync(fileName, { encoding: "utf8" });
   const annotatedMarkdown: string = JSON.stringify(
@@ -115,10 +100,34 @@ argv.args.forEach((fileName: string) => {
         logger.error("Error--", error);
       }
     });
-});
+}
+
+function parseCommandLine(commandLine?: string[]) {
+  const program = new Command();
+  program
+    .argument("[files...]", "Eingabedateien")
+    .option("-v, --verbose", "Debug output", false)
+    .option("--enabled-rules <rules...>")
+    .option("--disabled-rules <rules...>")
+    .option("--enabled-categories <categories...>")
+    .option("--disabled-categories <categories...>")
+    .option("--onlyEnabled", "Nur eingeschaltete Prüfungen nutzen", false)
+    .option("-r, --rule-config <files...>")
+    .option("-l, --language", "Sprache", "de-DE")
+    .option("-m, --mother-Tongue", "Muttersprache");
+
+  const argv = program.parse(commandLine ?? process.argv);
+  return argv;
+}
+
+// https://stackoverflow.com/a/52231746/2298807
+export function areWeTestingWithJest() {
+
+  return process.env.JEST_WORKER_ID !== undefined;
+}
 
 // Custom markdown interpretation
-function customMarkdownInterpreter(text: string): string {
+export function customMarkdownInterpreter(text: string): string {
   // Default of preserve line breaks
   let interpretation = "\n".repeat((text.match(/\n/g) || []).length);
   if (text.match(/^(?!\s*`{3})\s*`{1,2}/)) {
@@ -154,7 +163,7 @@ function isSpellingRule(ruleId: string): boolean {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function buildBody(options: Record<string, any>): ILanguageToolRequest {
+export function buildBody(options: Record<string, any>): ILanguageToolRequest {
   const data: ILanguageToolRequest = {
     language: options.language,
   };
@@ -179,12 +188,12 @@ function buildBody(options: Record<string, any>): ILanguageToolRequest {
   return data;
 }
 
-function buildSet(set?: string[]) {
+export function buildSet(set?: string[]) {
   if (!set) return "";
   return set.join(",");
 }
 
-function processResponse(
+export function processResponse(
   filename: string,
   fileContents: string,
   matches: ILanguageToolMatch[]
@@ -225,7 +234,7 @@ function processResponse(
   console.log(reporter(vfile));
 }
 
-function isEnabled(
+export function isEnabled(
   key: string,
   point: Point,
   returnUndefinedOnMiss = true
@@ -260,7 +269,7 @@ const commandMap: Record<
   "CONFIGURE-FILE": handleConfigureFile,
 };
 
-function applyEnableDisable(
+export function applyEnableDisable(
   parameter: string,
   enabled: boolean,
   state: Record<string, boolean>
@@ -279,7 +288,7 @@ function applyEnableDisable(
   return state;
 }
 
-function parseCommands(filename: string, fileContents: string): void {
+export function parseCommands(filename: string, fileContents: string): void {
   const lines = fileContents.split("\n");
   let lineIndex = 1;
   enabledRules = globalRules;
@@ -303,12 +312,12 @@ function parseCommands(filename: string, fileContents: string): void {
   });
 }
 
-function handleEnableDisableFile(action: string, parameter: string) {
+export function handleEnableDisableFile(action: string, parameter: string) {
   const enabled = action === "ENABLE-FILE";
   enabledRules = applyEnableDisable(parameter, enabled, enabledRules);
 }
 
-function handleConfigureFile(
+export function handleConfigureFile(
   _action: string,
   parameter: string,
   filename: string
@@ -342,7 +351,7 @@ function handleConfigureFile(
   });
 }
 
-function handleEnableDisableLine(
+export function handleEnableDisableLine(
   action: string,
   parameter: string,
   _filename: string,
@@ -355,4 +364,23 @@ function handleEnableDisableLine(
     enabled,
     enabledRulesPerLineNumber[lineno] ?? {}
   );
+}
+
+function mainline() {
+  argv = parseCommandLine();
+  options = argv.optsWithGlobals();
+  verbose = options.verbose;
+  body = buildBody(options);
+  if (options.ruleConfig) {
+    options.ruleConfig.forEach((filename: string) => {
+      if (!fs.existsSync(filename)) {
+        logger.warn(`Regeldatei ${filename} nicht gefunden`);
+        return;
+      }
+      handleConfigureFile("", filename, filename);
+      globalRules = Object.assign(enabledRules, globalRules);
+    });
+  }
+
+  argv.args.forEach((file: string) => processFile(file));
 }
