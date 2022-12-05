@@ -52,6 +52,37 @@ Enables/disables rules given by rule-id.
 
 Enables/disables rules given by rule-id.
 
-## Configuration files
+## Line and file inline comments
+
+```html
+<!-- languagetool-disable-file german_grammar_rule(atembar) -->
+<!-- languagetool-enable-file german_grammar_rule(atembar) -->
+<!-- languagetool-disable-line german_grammar_rule(atembar) -->
+<!-- languagetool-enable-line german_grammar_rule(atembar) -->
+<!-- languagetool-disable-next-line german_grammar_rule(atembar) -->
+<!-- languagetool-enable-next-line german_grammar_rule(atembar) -->
+```
 
 This needs **\<\<TBD\>\>**
+
+### Configuration Files
+
+The file contains a simple syntax:
+
+* Every line can contain a command, which is either `disabled` or `enabled`, followed by rules in the for
+`rule-id`, followed by an optional token in parens.
+
+* A line starting with a hash sign ('#') represents a comment
+
+An example:
+
+```plaintext
+# missing in lexicon
+disable german_grammar_rule(atembar) german_grammar_rule(atembare)
+
+# A Name
+disable GERMAN_SPELLER_RULE(Brom)
+
+# This book contains a lot of repeating starts
+disable GERMAN_WORD_REPEAT_BEGINNING_RULE
+```
