@@ -76,7 +76,7 @@ export function processFile(fileName: string) {
     annotationBuilder.build(fileContents, remarkBuilderOptions)
   );
   body.data = undefined;
-  logger.debug("body", body);
+  logger.debug(`body ${annotatedMarkdown.length}`, body);
   body.data = annotatedMarkdown;
   return axios
     .post(url.href, qs.stringify(body))
