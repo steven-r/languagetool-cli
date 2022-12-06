@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-12-06)
+
+
+### Features
+
+* add --url option ([e20a8a1](https://github.com/steven-r/languagetool-cli/commit/e20a8a174b8c4404f6ec5dee454212d9935d785d))
+
 # [1.0.0-beta.2](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-12-05)
 
 
