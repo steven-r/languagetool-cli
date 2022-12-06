@@ -33,15 +33,13 @@ const myformat = format.combine(
     }`;
   })
 );
-const instance = axios.create({
-  baseURL: "http://localhost:8081/v2/check",
-});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let argv: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let options:  any;
 let verbose = false;
+let url:URL = new URL('http://localhost:8081/v2/check')
 let outputChannel: (vfile: VFile|VFile[]) => string = reporter;
 
 const logger = createLogger({
@@ -68,9 +66,8 @@ let enabledRulesPerLineNumber: Record<number, Record<string, boolean>> = {};
 let globalRules: Record<string, boolean> = {};
 
 let body: ILanguageToolRequest;
-if (!areWeTestingWithJest()) {
-  mainline();
-}
+
+mainline();
 
 export function processFile(fileName: string) {
   logger.debug("Processing " + fileName);
@@ -79,8 +76,8 @@ export function processFile(fileName: string) {
     annotationBuilder.build(fileContents, remarkBuilderOptions)
   );
   body.data = annotatedMarkdown;
-  return instance
-    .post("http://localhost:8081/v2/check", qs.stringify(body))
+  return axios
+    .post(url.href, qs.stringify(body))
     .then((res) => processResponse(fileName, fileContents, res.data.matches))
     .catch(function (error) {
       if (error.response) {
@@ -95,7 +92,7 @@ export function processFile(fileName: string) {
         logger.error(error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        logger.error("Error--", error);
+        logger.error("Error:", error);
       }
     });
 }
@@ -111,18 +108,13 @@ function parseCommandLine(commandLine?: string[]) {
     .option("--disabled-categories <categories...>")
     .option("--only-enabled", "Use enabled rules only", false)
     .option("-r, --rule-config <files...>")
+    .option("--url <url>")
     .addOption(new Option("--output-format <format>", 'Output format').choices(['pretty', 'vim', 'reviewdog']).default('pretty'))
     .option("-l, --language <language>", "Sprache", "auto")
     .option("-m, --mother-tongue <mother-tongue>", "Mother tongue");
 
   const argv = program.parse(commandLine ?? process.argv);
   return argv;
-}
-
-// https://stackoverflow.com/a/52231746/2298807
-export function areWeTestingWithJest() {
-
-  return process.env.JEST_WORKER_ID !== undefined;
 }
 
 // Custom markdown interpretation
@@ -369,6 +361,9 @@ function mainline() {
   argv = parseCommandLine();
   options = argv.optsWithGlobals();
   verbose = options.verbose;
+  if (options.url) {
+    url = new URL(options.url);
+  }
   if (options.outputFormat !== 'pretty') {
     outputChannel = VimReporter;
   }
