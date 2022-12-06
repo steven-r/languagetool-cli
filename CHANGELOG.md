@@ -1,3 +1,10 @@
+# [1.0.0-beta.6](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-12-06)
+
+
+### Features
+
+* limit/configure concurrency ([e9302ee](https://github.com/steven-r/languagetool-cli/commit/e9302ee95cb4cf24e8ef9355d001f36b1a772f2f))
+
 # [1.0.0-beta.5](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-12-06)
 
 
