@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-12-06)
+
+
+### Bug Fixes
+
+* reduce debugging output ([2715e15](https://github.com/steven-r/languagetool-cli/commit/2715e15ea41a2d8e52d8191566f0ecedadb170f2))
+
 # [1.0.0-beta.4](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-12-06)
 
 
