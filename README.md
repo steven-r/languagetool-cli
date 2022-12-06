@@ -14,7 +14,7 @@ You have to have a running LanguageTool-Server (see <https://dev.languagetool.or
 Usage: language-tool [options] [files...]
 
 Arguments:
-  files                                  Eingabedateien
+  files                                  Input files
 
 Options:
   -v, --verbose                          Debug output (default: false)
@@ -22,13 +22,14 @@ Options:
   --disabled-rules <rules...>
   --enabled-categories <categories...>
   --disabled-categories <categories...>
-  --only-enabled                         Nur eingeschaltete Prüfungen nutzen (default: false)
-  -r, --rule-config <files...>           Rule file
-  --output-format 'pretty'|'vim'|'reviewdog' Output format (default: 'pretty')
-  -l, --language                         Sprache
-  -m, --mother-Tongue                    Muttersprache
+  --only-enabled                         Use enabled rules only (default: false)
+  -r, --rule-config <files...>
+  --url <url>
+  --output-format <format>               Output format (choices: "pretty", "vim", "reviewdog", default: "pretty")
+  -l, --language <language>              Sprache (default: "auto")
+  -m, --mother-tongue <mother-tongue>    Mother tongue
   -h, --help                             display help for command
-```
+  ```
 
 ### -language, -l
 
@@ -54,6 +55,9 @@ Enables/disables rules given by rule-id.
 Enables/disables rules given by rule-id.
 
 ### --output-format
+
+Output messages a `pretty` (user friedly) or computer readable (`vim`, `reviewdog`) format.
+
 ## Line and file inline comments
 
 ```html
