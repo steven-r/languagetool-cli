@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-12-06)
+
+
+### Features
+
+* bump ([b5ec433](https://github.com/steven-r/languagetool-cli/commit/b5ec4332dac8217ec151ad98e128ee8efd90656c))
+
 # [1.0.0-beta.3](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-12-06)
 
 
