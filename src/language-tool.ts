@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node-esm
+#!/usr/bin/env node
 
 import axios from "axios";
 import { Command, Option } from "commander";
@@ -75,6 +75,8 @@ export function processFile(fileName: string) {
   const annotatedMarkdown: string = JSON.stringify(
     annotationBuilder.build(fileContents, remarkBuilderOptions)
   );
+  body.data = undefined;
+  logger.debug("body", body);
   body.data = annotatedMarkdown;
   return axios
     .post(url.href, qs.stringify(body))
@@ -94,6 +96,7 @@ export function processFile(fileName: string) {
         // Something happened in setting up the request that triggered an Error
         logger.error("Error:", error);
       }
+      process.exit(1);
     });
 }
 
@@ -361,6 +364,9 @@ function mainline() {
   argv = parseCommandLine();
   options = argv.optsWithGlobals();
   verbose = options.verbose;
+  if (verbose) {
+    logger.transports[0].level = 'debug';
+  }
   if (options.url) {
     url = new URL(options.url);
   }
