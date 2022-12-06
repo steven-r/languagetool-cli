@@ -900,6 +900,13 @@ acorn@^8.4.1, acorn@^8.8.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.1.tgz#0a3f9cbecc4ec3bea6f0a80b66ae8dd2da250b73"
   integrity sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==
 
+afterward@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/afterward/-/afterward-2.0.0.tgz#966a7531d2fdb41bff67b4ea83abd9ebcbef5eb2"
+  integrity sha512-7n9Vkbb8cmMRKKSfe5qgyqX4Yjdaty0QP/+GXYawZK8Vcq+8E5FCmbWbwfCoiBnDoAY/edKLNg2TwgGcwdA+3Q==
+  dependencies:
+    define-error "~1.0.0"
+
 agent-base@6, agent-base@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
@@ -1218,6 +1225,11 @@ camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
+capture-stack-trace@~1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.2.tgz#1c43f6b059d4249e7f3f8724f15f048b927d3a8a"
+  integrity sha512-X/WM2UQs6VMHUtjUDnZTRI+i1crWteJySFzr9UpGoQa4WQffXVTTXuekjl7TjZRlcF2XfjgITT0HxZ9RnxeT0w==
+
 cardinal@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/cardinal/-/cardinal-2.1.1.tgz#7cc1055d822d212954d07b085dea251cc7bc5505"
@@ -1493,6 +1505,19 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
+concurrent-queue@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/concurrent-queue/-/concurrent-queue-7.0.2.tgz#3cfccfa8b9ce08ca23d85319f5c36ec1bf9540fa"
+  integrity sha512-icXDqc0JBdcQ3ubXiXcqVhuFeRrec39zVD2X5z7FKwwj0pImnfLWtAhGyX4CcBDD+YoqLesClOeRss+pZnm6/Q==
+  dependencies:
+    afterward "~2.0.0"
+    define-error "~1.0.0"
+    eventuate "~4.0.0"
+    object-assign "~4.0.1"
+    on-error "~2.1.0"
+    once "~1.3.2"
+    promise-polyfill "~2.1.0"
+
 console-control-strings@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
@@ -1684,6 +1709,13 @@ defaults@^1.0.3:
   integrity sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==
   dependencies:
     clone "^1.0.2"
+
+define-error@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/define-error/-/define-error-1.0.0.tgz#5fb48a45dd5f65f88f82b0c9a223c0193379d3fe"
+  integrity sha512-HLdUb9mNENZ/tjnZGlITfOnx7wSM7a6e+WEDyhKSrsN/g5dJUS6kepG6qJApRLAdjRofQ2W8R3yrtI6GeyGGVg==
+  dependencies:
+    capture-stack-trace "~1.0.0"
 
 del@^6.0.0:
   version "6.1.1"
@@ -2101,6 +2133,15 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
+
+eventuate@~4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eventuate/-/eventuate-4.0.0.tgz#4e269055316fff4109078141f926600c74b571a0"
+  integrity sha512-SysKo5/rgqCaXlO4H4DE62JXCFtDpdm+boWOzaeaYph3Xejy04Cc4/E2HDPnOES0MFb643WgKRlx09W2iVAIBw==
+  dependencies:
+    define-error "~1.0.0"
+    object-assign "~3.0.0"
+    shallow-copy "0.0.1"
 
 execa@^5.0.0:
   version "5.1.1"
@@ -4327,15 +4368,37 @@ npmlog@^6.0.0, npmlog@^6.0.2:
     gauge "^4.0.3"
     set-blocking "^2.0.0"
 
+object-assign@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
+  integrity sha512-jHP15vXVGeVh1HuaA2wY6lxk+whK/x4KBG88VXeRma7CCun7iGD5qPc4eYykQ9sdQvg8jkwFKsSxHln2ybW3xQ==
+
+object-assign@~4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.0.1.tgz#99504456c3598b5cad4fc59c26e8a9bb107fe0bd"
+  integrity sha512-c6legOHWepAbWnp3j5SRUMpxCXBKI4rD7A5Osn9IzZ8w4O/KccXdW0lqdkQKbpk0eHGjNgKihgzY6WuEq99Tfw==
+
 object-inspect@^1.9.0:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.2.tgz#c0641f26394532f28ab8d796ab954e43c009a8ea"
   integrity sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==
 
+on-error@~2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/on-error/-/on-error-2.1.0.tgz#bac56e4b49804c49167150dad2759b4261117dce"
+  integrity sha512-wpKXxCW2wXLI+9DB9DDBVuOCN9C5rjyaP4GWwqhgrSd2ys1Vyc9yGaPmC5HSOdQ30x9zCLozi9mHx3lm01E+LQ==
+
 once@^1.3.0, once@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
   integrity sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==
+  dependencies:
+    wrappy "1"
+
+once@~1.3.2:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/once/-/once-1.3.3.tgz#b2e261557ce4c314ec8304f3fa82663e4297ca20"
+  integrity sha512-6vaNInhu+CHxtONf3zw3vq4SP2DOQhjBvIa3rNcG0+P7eKWlYH6Peu7rHizSloRU2EwMz6GraLieis9Ac9+p1w==
   dependencies:
     wrappy "1"
 
@@ -4692,6 +4755,11 @@ promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==
+
+promise-polyfill@~2.1.0:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-2.1.4.tgz#7319223532c26ac3e555e7e9bcc0cf76201b51ad"
+  integrity sha512-/DVUJXyaiYr7Pu0q2qPV/OtABpiukAHswJb9VV/tUVFsvC5iZUTyVPxfEr8cIVatGa5/Mxeli8QMyzAMBmoiYg==
 
 promise-retry@^2.0.1:
   version "2.0.1"
@@ -5103,6 +5171,11 @@ set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
+
+shallow-copy@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/shallow-copy/-/shallow-copy-0.0.1.tgz#415f42702d73d810330292cc5ee86eae1a11a170"
+  integrity sha512-b6i4ZpVuUxB9h5gfCxPiusKYkqTMOjEbBs4wMaFbkfia4yFv92UKZ6Df8WXcKbn08JNL/abvg3FnMAOfakDvUw==
 
 shebang-command@^2.0.0:
   version "2.0.0"
