@@ -25,6 +25,7 @@ Options:
   --only-enabled                         Use enabled rules only (default: false)
   -r, --rule-config <files...>
   --url <url>
+  --concurrent <concurrent>
   --output-format <format>               Output format (choices: "pretty", "vim", "reviewdog", default: "pretty")
   -l, --language <language>              Sprache (default: "auto")
   -m, --mother-tongue <mother-tongue>    Mother tongue
@@ -57,6 +58,10 @@ Enables/disables rules given by rule-id.
 ### --output-format
 
 Output messages a `pretty` (user friedly) or computer readable (`vim`, `reviewdog`) format.
+
+### --concurrent
+
+Limit the number of concurrent requests to the LanguageTool-server in parallel. The default is set to 2.
 
 ## Line and file inline comments
 

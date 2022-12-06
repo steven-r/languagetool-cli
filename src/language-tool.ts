@@ -7,6 +7,7 @@ import fs from "fs";
 import { TransformableInfo } from "logform";
 import path from "path";
 import * as qs from "qs";
+import cq from 'concurrent-queue';
 import { VFile } from "vfile";
 import { location, Point } from "vfile-location";
 import { reporter } from "vfile-reporter";
@@ -18,6 +19,8 @@ import {
   ILanguageToolMatch,
   ILanguageToolRequest,
 } from "./interfaces";
+
+const DEFAULT_CONCURRENT_SETTING = 2;
 
 const myformat = format.combine(
   format.colorize(),
@@ -37,10 +40,10 @@ const myformat = format.combine(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let argv: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let options:  any;
+let options: any;
 let verbose = false;
-let url:URL = new URL('http://localhost:8081/v2/check')
-let outputChannel: (vfile: VFile|VFile[]) => string = reporter;
+let url: URL = new URL("http://localhost:8081/v2/check");
+let outputChannel: (vfile: VFile | VFile[]) => string = reporter;
 
 const logger = createLogger({
   transports: [
@@ -69,7 +72,8 @@ let body: ILanguageToolRequest;
 
 mainline();
 
-export function processFile(fileName: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function processFile(fileName: string): Promise<any> {
   logger.debug("Processing " + fileName);
   const fileContents = fs.readFileSync(fileName, { encoding: "utf8" });
   const annotatedMarkdown: string = JSON.stringify(
@@ -112,7 +116,12 @@ function parseCommandLine(commandLine?: string[]) {
     .option("--only-enabled", "Use enabled rules only", false)
     .option("-r, --rule-config <files...>")
     .option("--url <url>")
-    .addOption(new Option("--output-format <format>", 'Output format').choices(['pretty', 'vim', 'reviewdog']).default('pretty'))
+    .option("--concurrent <concurrent>")
+    .addOption(
+      new Option("--output-format <format>", "Output format")
+        .choices(["pretty", "vim", "reviewdog"])
+        .default("pretty")
+    )
     .option("-l, --language <language>", "Sprache", "auto")
     .option("-m, --mother-tongue <mother-tongue>", "Mother tongue");
 
@@ -225,7 +234,9 @@ export function processResponse(
       vfile.message(message, point, match.rule.id);
     }
   });
-  console.log(outputChannel(vfile));
+  if (vfile.messages.length > 0) {
+    console.log(outputChannel(vfile));
+  }
 }
 
 export function isEnabled(
@@ -364,13 +375,14 @@ function mainline() {
   argv = parseCommandLine();
   options = argv.optsWithGlobals();
   verbose = options.verbose;
+  const concurrent_count = options.concurrent ? Number.parseInt(options.concurrent) : DEFAULT_CONCURRENT_SETTING;
   if (verbose) {
-    logger.transports[0].level = 'debug';
+    logger.transports[0].level = "debug";
   }
   if (options.url) {
     url = new URL(options.url);
   }
-  if (options.outputFormat !== 'pretty') {
+  if (options.outputFormat !== "pretty") {
     outputChannel = VimReporter;
   }
   body = buildBody(options);
@@ -385,5 +397,6 @@ function mainline() {
     });
   }
 
-  argv.args.forEach((file: string) => processFile(file));
+  const queue = cq().limit({ concurrency: concurrent_count }).process(processFile)
+  argv.args.forEach((file: string) => queue(file));  
 }

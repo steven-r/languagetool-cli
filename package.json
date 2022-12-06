@@ -49,6 +49,7 @@
     "annotatedtext": "^1.1.2",
     "axios": "^1.2.0",
     "commander": "^9.4.1",
+    "concurrent-queue": "^7.0.2",
     "find-up": "^6.3.0",
     "mdast-util-directive": "^2.2.2",
     "micromark-extension-directive": "^2.1.2",
