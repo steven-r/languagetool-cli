@@ -1,3 +1,10 @@
+# [1.0.0-beta.7](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-12-12)
+
+
+### Bug Fixes
+
+* fix dependency problem with annotatedtext ([39b564d](https://github.com/steven-r/languagetool-cli/commit/39b564d88e51e9c0507c7e03f0c8f4bee5a79801))
+
 # [1.0.0-beta.6](https://github.com/steven-r/languagetool-cli/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-12-06)
 
 
