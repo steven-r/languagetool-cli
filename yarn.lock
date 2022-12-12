@@ -951,7 +951,7 @@ ajv@^8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-annotatedtext@^1.1.2:
+annotatedtext@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/annotatedtext/-/annotatedtext-1.1.2.tgz#0c443ae1a618367d7858b620fb18c949455f9fda"
   integrity sha512-BosVs3qy82Ey+5282B3ob4p38I+kMzz4RTw6DSEl3mF3bEVuCGLWUrm9yUzX2BrY6YLqRvgjc4Fv31EzMn7SIQ==

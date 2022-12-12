@@ -227,11 +227,8 @@ export function processResponse(
       result = isEnabled(key, point, false);
     }
     if (result === true) {
-      let message = match.message;
-      if (word) {
-        message += ` (${word})`;
-      }
-      vfile.message(message, point, match.rule.id);
+      const message = match.message + "[" + match.rule.id + "]";
+      vfile.message(message, point);
     }
   });
   if (vfile.messages.length > 0) {
