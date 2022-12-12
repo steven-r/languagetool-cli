@@ -945,9 +945,9 @@ ajv@^8.11.0:
     uri-js "^4.2.2"
 
 annotatedtext@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/annotatedtext/-/annotatedtext-1.1.2.tgz#0c443ae1a618367d7858b620fb18c949455f9fda"
-  integrity sha512-BosVs3qy82Ey+5282B3ob4p38I+kMzz4RTw6DSEl3mF3bEVuCGLWUrm9yUzX2BrY6YLqRvgjc4Fv31EzMn7SIQ==
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/annotatedtext/-/annotatedtext-1.1.3.tgz#ad506815d462ccbff4368b983ba3e9bef858ef4e"
+  integrity sha512-VUJjUmXhgdJydpNCg/LTyZiVaM0a7M0RlSbAutbzeHYwLu6Q8vbU5ma85P1AcdVUIXYDxb6VStIFeZ2B4IzHuQ==
 
 ansi-escapes@^4.2.1:
   version "4.3.2"
