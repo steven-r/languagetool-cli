@@ -6,6 +6,7 @@ on:
       - beta
 jobs:
   release:
+    permissions: write-all
     name: Release
     runs-on: ubuntu-latest
     steps:
