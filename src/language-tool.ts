@@ -1,27 +1,32 @@
-#!/usr/bin/env ts-node-esm
+#!/usr/bin/env node
 
 import axios from "axios";
-import { Command } from "commander";
+import { Command, Option } from "commander";
 import { findUpSync } from "find-up";
 import fs from "fs";
 import { TransformableInfo } from "logform";
 import path from "path";
 import * as qs from "qs";
+import cq from 'concurrent-queue';
 import { VFile } from "vfile";
 import { location, Point } from "vfile-location";
 import { reporter } from "vfile-reporter";
 import { createLogger, format, transports } from "winston";
 import * as annotationBuilder from "./annotation-builder.js";
+import { VimReporter } from "./vim-reporter.js";
 import {
   IAnnotationBuilderOptions,
   ILanguageToolMatch,
   ILanguageToolRequest,
 } from "./interfaces";
 
+const DEFAULT_CONCURRENT_SETTING = 2;
+
 const myformat = format.combine(
   format.colorize(),
   format.timestamp(),
   format.align(),
+  format.splat(),
   format.printf((info: TransformableInfo) => {
     const { timestamp, level, message, ...args } = info;
 
@@ -31,15 +36,14 @@ const myformat = format.combine(
     }`;
   })
 );
-const instance = axios.create({
-  baseURL: "http://localhost:8081/v2/check",
-});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let argv: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let options:  any;
+let options: any;
 let verbose = false;
+let url: URL = new URL("http://localhost:8081/v2/check");
+let outputChannel: (vfile: VFile | VFile[]) => string = reporter;
 
 const logger = createLogger({
   transports: [
@@ -49,11 +53,6 @@ const logger = createLogger({
     }),
   ],
 });
-
-logger.info("Rechtschreib- und Grammatik-Prüfung");
-if (argv) {
-  logger.debug(`They're ${argv.args.length} files to be processed.`);
-}
 
 const remarkBuilderOptions: IAnnotationBuilderOptions =
   annotationBuilder.defaults;
@@ -70,19 +69,21 @@ let enabledRulesPerLineNumber: Record<number, Record<string, boolean>> = {};
 let globalRules: Record<string, boolean> = {};
 
 let body: ILanguageToolRequest;
-if (!areWeTestingWithJest()) {
-  mainline();
-}
 
-export function processFile(fileName: string) {
-  logger.info("Proessing " + fileName);
+mainline();
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function processFile(fileName: string): Promise<any> {
+  logger.debug("Processing " + fileName);
   const fileContents = fs.readFileSync(fileName, { encoding: "utf8" });
   const annotatedMarkdown: string = JSON.stringify(
     annotationBuilder.build(fileContents, remarkBuilderOptions)
   );
+  body.data = undefined;
+  logger.debug(`body ${annotatedMarkdown.length}`, body);
   body.data = annotatedMarkdown;
-  return instance
-    .post("http://localhost:8081/v2/check", qs.stringify(body))
+  return axios
+    .post(url.href, qs.stringify(body))
     .then((res) => processResponse(fileName, fileContents, res.data.matches))
     .catch(function (error) {
       if (error.response) {
@@ -97,33 +98,35 @@ export function processFile(fileName: string) {
         logger.error(error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        logger.error("Error--", error);
+        logger.error("Error:", error);
       }
+      process.exit(1);
     });
 }
 
 function parseCommandLine(commandLine?: string[]) {
   const program = new Command();
   program
-    .argument("[files...]", "Eingabedateien")
+    .argument("[files...]", "Input files")
     .option("-v, --verbose", "Debug output", false)
     .option("--enabled-rules <rules...>")
     .option("--disabled-rules <rules...>")
     .option("--enabled-categories <categories...>")
     .option("--disabled-categories <categories...>")
-    .option("--onlyEnabled", "Nur eingeschaltete Prüfungen nutzen", false)
+    .option("--only-enabled", "Use enabled rules only", false)
     .option("-r, --rule-config <files...>")
-    .option("-l, --language", "Sprache", "de-DE")
-    .option("-m, --mother-Tongue", "Muttersprache");
+    .option("--url <url>")
+    .option("--concurrent <concurrent>")
+    .addOption(
+      new Option("--output-format <format>", "Output format")
+        .choices(["pretty", "vim", "reviewdog"])
+        .default("pretty")
+    )
+    .option("-l, --language <language>", "Sprache", "auto")
+    .option("-m, --mother-tongue <mother-tongue>", "Mother tongue");
 
   const argv = program.parse(commandLine ?? process.argv);
   return argv;
-}
-
-// https://stackoverflow.com/a/52231746/2298807
-export function areWeTestingWithJest() {
-
-  return process.env.JEST_WORKER_ID !== undefined;
 }
 
 // Custom markdown interpretation
@@ -224,14 +227,13 @@ export function processResponse(
       result = isEnabled(key, point, false);
     }
     if (result === true) {
-      let message = match.message;
-      if (word) {
-        message += ` (${word})`;
-      }
-      vfile.message(message, point, match.rule.id);
+      const message = match.message + "[" + match.rule.id + "]";
+      vfile.message(message, point);
     }
   });
-  console.log(reporter(vfile));
+  if (vfile.messages.length > 0) {
+    console.log(outputChannel(vfile));
+  }
 }
 
 export function isEnabled(
@@ -370,6 +372,16 @@ function mainline() {
   argv = parseCommandLine();
   options = argv.optsWithGlobals();
   verbose = options.verbose;
+  const concurrent_count = options.concurrent ? Number.parseInt(options.concurrent) : DEFAULT_CONCURRENT_SETTING;
+  if (verbose) {
+    logger.transports[0].level = "debug";
+  }
+  if (options.url) {
+    url = new URL(options.url);
+  }
+  if (options.outputFormat !== "pretty") {
+    outputChannel = VimReporter;
+  }
   body = buildBody(options);
   if (options.ruleConfig) {
     options.ruleConfig.forEach((filename: string) => {
@@ -382,5 +394,6 @@ function mainline() {
     });
   }
 
-  argv.args.forEach((file: string) => processFile(file));
+  const queue = cq().limit({ concurrency: concurrent_count }).process(processFile)
+  argv.args.forEach((file: string) => queue(file));  
 }
