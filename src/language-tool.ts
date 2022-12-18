@@ -95,10 +95,10 @@ export async function processFile(fileName: string): Promise<any> {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
-        logger.error(error.request);
+        logger.error("No data returned");
       } else {
         // Something happened in setting up the request that triggered an Error
-        logger.error("Error:", error);
+        logger.error("Error: %s", error.message);
       }
       process.exit(1);
     });
@@ -201,6 +201,7 @@ export function processResponse(
   fileContents: string,
   matches: ILanguageToolMatch[]
 ) {
+  logger.debug("Coming back with %d matches", matches.length)
   filename = path.resolve(filename);
   const vfile = new VFile(fileContents);
   parseCommands(filename, fileContents);

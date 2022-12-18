@@ -1,5 +1,6 @@
 {
     "[markdown]": {
         "editor.cursorSurroundingLines": 0
-    }
+    },
+    "editor.fontSize": 12
 }
