@@ -43,7 +43,7 @@
     "prettier": "^2.8.0",
     "semantic-release": "^19.0.5",
     "ts-node": "^10.9.1",
-    "vitest": "^0.25.3"
+    "vitest": "^0.26.2"
   },
   "dependencies": {
     "annotatedtext": "1.1.2",
