@@ -10,7 +10,7 @@ jobs:
       - name: Dependabot Batcher
         uses: Legal-and-General/dependabot-batcher@v1.0.1
         with:
-          token: ${{ secrets.YOUR_TOKEN }} #required
+          token: ${{ secrets.GITHUB_TOKEN }}
           bseBranchName: 'main' #optional
           batchBranchName: 'dep-batcher-updates' #optional
           batchPullTitle: 'Dependabot Batcher Updates' #optional
