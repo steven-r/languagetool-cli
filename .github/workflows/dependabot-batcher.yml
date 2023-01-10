@@ -6,9 +6,9 @@ on:
 jobs:
   # Batches Dependabot PRs into one by merging them into a combined branch, then raising a new PR
   dependabot-batcher:
-    name: 'Combine Dependabot PRs'
-    uses: Legal-and-General/dependabot-batcher
-    token: ${{ secrets.YOUR_TOKEN }} #required
-    baseBranchName: 'main' #optional
-    batchBranchName: 'dep-batcher-updates' #optional
-    batchPullTitle: 'Dependabot Batcher Updates' #optional
+    name: Dependabot Batcher
+    uses: Legal-and-General/dependabot-batcher@v1.0.1
+      token: ${{ secrets.YOUR_TOKEN }} #required
+      baseBranchName: 'main' #optional
+      batchBranchName: 'dep-batcher-updates' #optional
+      batchPullTitle: 'Dependabot Batcher Updates' #optional
