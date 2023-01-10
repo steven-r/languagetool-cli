@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dependabot Batcher
-        uses: Legal-and-General/dependabot-batcher@v1.0.1
+        uses: Legal-and-General/dependabot-batcher@v1.0.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           bseBranchName: 'main' #optional
