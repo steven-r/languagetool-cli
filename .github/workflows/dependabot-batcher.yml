@@ -1,7 +1,6 @@
 name: 'Dependabot Batcher: Scheduled'
 on:
-  schedule:
-    - cron: '30 18 * * *'
+  workflow_dispatch
 
 jobs:
   # Batches Dependabot PRs into one by merging them into a combined branch, then raising a new PR
