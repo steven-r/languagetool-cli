@@ -3622,10 +3622,10 @@ marked@^4.1.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.5.tgz#979813dfc1252cc123a79b71b095759a32f42a5d"
   integrity sha512-jPueVhumq7idETHkb203WDD4fMA3yV9emQ5vLwop58lu8bTclMghBWcYAavlDqIEMaisADinV1TooIFCfqOsYQ==
 
-mdast-util-directive@2.2.3, mdast-util-directive@^2.0.0:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/mdast-util-directive/-/mdast-util-directive-2.2.3.tgz#d307c006d4c90781ac4950300bbae448ee890fa9"
-  integrity sha512-BhBvlKk2m2d+C/C6qiPtM5J6gXVGAYlTarSqnud4GPtaZPumZLuMSoJXMRYkM8WnzJ9cDaV5X7KQBUdiLxJdvA==
+mdast-util-directive@2.2.4, mdast-util-directive@^2.0.0:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/mdast-util-directive/-/mdast-util-directive-2.2.4.tgz#e397ed699ec83938cb4a48dc1cec3ae69cbd7aa3"
+  integrity sha512-sK3ojFP+jpj1n7Zo5ZKvoxP1MvLyzVG63+gm40Z/qI00avzdPCYxt7RBMgofwAva9gBjbDBWVRB/i+UD+fUCzQ==
   dependencies:
     "@types/mdast" "^3.0.0"
     "@types/unist" "^2.0.0"
