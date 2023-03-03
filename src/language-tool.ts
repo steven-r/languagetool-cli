@@ -9,8 +9,9 @@ import path from "path";
 import * as qs from "qs";
 import cq from 'concurrent-queue';
 import { VFile } from "vfile";
-import { location, Point } from "vfile-location";
+import { location } from "vfile-location";
 import { reporter } from "vfile-reporter";
+import { Point } from 'unist';
 import { createLogger, format, transports } from "winston";
 import * as annotationBuilder from "./annotation-builder.js";
 import { VimReporter } from "./vim-reporter.js";
@@ -222,14 +223,16 @@ export function processResponse(
     if (word) {
       key2 = key2 + `(${word})`;
     }
-    const point = loc.toPoint(match.offset);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const point: any = loc.toPoint(match.offset);
     let result = isEnabled(key2, point);
     if (result == undefined) {
       result = isEnabled(key, point, false);
     }
     if (result === true) {
       const message = match.message + "[" + match.rule.id + "]";
-      vfile.message(message, point);
+      const vPoint: Point = point; // translate types
+      vfile.message(message, vPoint);
     }
   });
   if (vfile.messages.length > 0) {

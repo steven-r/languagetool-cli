@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/steven-r/languagetool-cli/compare/v1.0.0...v1.0.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* :bug: fix error handling output ([c636ae2](https://github.com/steven-r/languagetool-cli/commit/c636ae258b8876942cc2a78aad4bd58cf883b4db))
+
 ## [1.0.1-beta.1](https://github.com/steven-r/languagetool-cli/compare/v1.0.0...v1.0.1-beta.1) (2022-12-18)
 
 
