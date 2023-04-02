@@ -54,7 +54,7 @@
     "find-up": "6.3.0",
     "mdast-util-directive": "2.2.4",
     "micromark-extension-directive": "2.1.2",
-    "qs": "6.11.0",
+    "qs": "6.11.1",
     "remark-directive": "2.0.1",
     "remark-frontmatter": "4.0.1",
     "remark-gfm": "3.0.1",
