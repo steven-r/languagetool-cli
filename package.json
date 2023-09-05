@@ -43,7 +43,7 @@
     "prettier": "2.8.4",
     "semantic-release": "20.1.0",
     "ts-node": "10.9.1",
-    "vite": "4.0.4",
+    "vite": "4.0.5",
     "vitest": "0.28.3"
   },
   "dependencies": {
