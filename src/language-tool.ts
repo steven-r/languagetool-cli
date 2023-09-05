@@ -99,7 +99,7 @@ export async function processFile(fileName: string): Promise<any> {
         logger.error("No data returned");
       } else {
         // Something happened in setting up the request that triggered an Error
-        logger.error("Error: %s", error.message);
+        logger.error(`Error: ${error.message}`);
       }
       process.exit(1);
     });
@@ -202,7 +202,8 @@ export function processResponse(
   fileContents: string,
   matches: ILanguageToolMatch[]
 ) {
-  logger.debug("Coming back with %d matches", matches.length)
+  logger.debug("Coming back with %d matches", matches.length);
+  let ignored = 0;
   filename = path.resolve(filename);
   const vfile = new VFile(fileContents);
   parseCommands(filename, fileContents);
@@ -233,8 +234,13 @@ export function processResponse(
       const message = match.message + "[" + match.rule.id + "]";
       const vPoint: Point = point; // translate types
       vfile.message(message, vPoint);
+    } else {
+      ignored++;
     }
   });
+  if (ignored > 0) {
+    logger.debug("Ignored matches: %d", matches.length);
+  }
   if (vfile.messages.length > 0) {
     console.log(outputChannel(vfile));
   }
