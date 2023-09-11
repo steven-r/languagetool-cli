@@ -63,7 +63,7 @@
     "vfile": "5.3.7",
     "vfile-location": "4.1.0",
     "vfile-reporter": "7.0.5",
-    "winston": "3.8.2"
+    "winston": "3.10.0"
   },
   "commitlint": {
     "extends": [
