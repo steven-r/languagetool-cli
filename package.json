@@ -56,7 +56,7 @@
     "micromark-extension-directive": "2.1.2",
     "qs": "6.11.2",
     "remark-directive": "2.0.1",
-    "remark-frontmatter": "4.0.1",
+    "remark-frontmatter": "5.0.0",
     "remark-gfm": "3.0.1",
     "remark-parse": "10.0.1",
     "typescript": "5.0.2",
