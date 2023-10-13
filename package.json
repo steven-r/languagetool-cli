@@ -61,8 +61,8 @@
     "remark-parse": "10.0.1",
     "typescript": "5.0.2",
     "vfile": "6.0.1",
-    "vfile-location": "4.1.0",
-    "vfile-reporter": "7.0.5",
+    "vfile-location": "5.0.2",
+    "vfile-reporter": "8.1.0",
     "winston": "3.10.0"
   },
   "commitlint": {
