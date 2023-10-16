@@ -5021,18 +5021,18 @@ micromark-core-commonmark@^2.0.0:
     micromark-util-symbol "^2.0.0"
     micromark-util-types "^2.0.0"
 
-micromark-extension-directive@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/micromark-extension-directive/-/micromark-extension-directive-2.1.2.tgz#5445bc7676e72e8d23f47313920a65f574269be3"
-  integrity sha512-brqLEztt14/73snVXYsq9Cv6ng67O+Sy69ZuM0s8ZhN/GFI9rnyXyj0Y0DaCwi648vCImv7/U1H5TzR7wMv5jw==
+micromark-extension-directive@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/micromark-extension-directive/-/micromark-extension-directive-3.0.0.tgz#527869de497a6de9024138479091bc885dae076b"
+  integrity sha512-61OI07qpQrERc+0wEysLHMvoiO3s2R56x5u7glHq2Yqq6EHbH4dW25G9GfDdGCDYqA21KE6DWgNSzxSwHc2hSg==
   dependencies:
-    micromark-factory-space "^1.0.0"
-    micromark-factory-whitespace "^1.0.0"
-    micromark-util-character "^1.0.0"
-    micromark-util-symbol "^1.0.0"
-    micromark-util-types "^1.0.0"
+    devlop "^1.0.0"
+    micromark-factory-space "^2.0.0"
+    micromark-factory-whitespace "^2.0.0"
+    micromark-util-character "^2.0.0"
+    micromark-util-symbol "^2.0.0"
+    micromark-util-types "^2.0.0"
     parse-entities "^4.0.0"
-    uvu "^0.5.0"
 
 micromark-extension-directive@^2.0.0:
   version "2.2.1"
