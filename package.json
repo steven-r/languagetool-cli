@@ -57,7 +57,7 @@
     "qs": "6.11.2",
     "remark-directive": "3.0.0",
     "remark-frontmatter": "5.0.0",
-    "remark-gfm": "3.0.1",
+    "remark-gfm": "4.0.0",
     "remark-parse": "10.0.1",
     "typescript": "5.0.2",
     "vfile": "6.0.1",
