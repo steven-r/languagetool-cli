@@ -52,7 +52,7 @@
     "commander": "10.0.0",
     "concurrent-queue": "7.0.2",
     "find-up": "6.3.0",
-    "mdast-util-directive": "2.2.4",
+    "mdast-util-directive": "3.0.0",
     "micromark-extension-directive": "3.0.0",
     "qs": "6.11.2",
     "remark-directive": "3.0.0",
