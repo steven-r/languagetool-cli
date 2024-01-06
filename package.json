@@ -41,7 +41,7 @@
     "husky": "8.0.3",
     "is-ci": "3.0.1",
     "prettier": "3.0.3",
-    "semantic-release": "22.0.10",
+    "semantic-release": "22.0.12",
     "ts-node": "10.9.2",
     "vite": "5.0.10",
     "vitest": "1.1.0"
