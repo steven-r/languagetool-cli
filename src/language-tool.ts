@@ -138,7 +138,7 @@ export function customMarkdownInterpreter(text: string): string {
   if (text.match(/^(?!\s*`{3})\s*`{1,2}/)) {
     // Treat inline code as redacted text
     interpretation = "`" + "#".repeat(text.length - 2) + "`";
-  } else if (text.match(/::+[^:]+::+/)) {
+  } else if (text.match(/::+([^:]{1,1000}::+)/)) {
     // block comments
     interpretation += "# ";
   } else if (text.match(/#\s+$/)) {
@@ -147,7 +147,7 @@ export function customMarkdownInterpreter(text: string): string {
   } else if (text.match(/\*\s+$/)) {
     // Preserve bullets without leading spaces
     interpretation += "* ";
-  } else if (text.match(/\d+\.\s+$/)) {
+  } else if (text.match(/([^\d]|^)\d{1,4}\.\s+$/)) {
     // Treat as bullets without leading spaces
     interpretation += "** ";
   }
