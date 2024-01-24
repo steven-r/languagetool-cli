@@ -1,6 +1,6 @@
 {
   "name": "languagetool-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Command line tool to check for spelling errors in documents",
   "main": "dist/language-tool.js",
   "bin": {
