@@ -39,14 +39,14 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.6.0.tgz#ec6cd237440700bc23ca23087f513c75508958b0"
   integrity sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==
 
-"@commitlint/cli@18.4.4":
-  version "18.4.4"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-18.4.4.tgz#24bdb295f0e9e87dfe5371e9a16aacac92017c5d"
-  integrity sha512-Ro3wIo//fV3XiV1EkdpHog6huaEyNcUAVrSmtgKqYM5g982wOWmP4FXvEDFwRMVgz878CNBvvCc33dMZ5AQJ/g==
+"@commitlint/cli@18.5.0":
+  version "18.5.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-18.5.0.tgz#e485c29d51b66890cd93a4c7f3f1e5ed15101db2"
+  integrity sha512-g/N0mJBrHcTdiccUpJknS6/ru45eIEAZyhEy9sL2ILjzK2IVNrpzlAPtxEr8bZCZLGwPBUrQ5UCIIu4uebhImw==
   dependencies:
     "@commitlint/format" "^18.4.4"
-    "@commitlint/lint" "^18.4.4"
-    "@commitlint/load" "^18.4.4"
+    "@commitlint/lint" "^18.5.0"
+    "@commitlint/load" "^18.5.0"
     "@commitlint/read" "^18.4.4"
     "@commitlint/types" "^18.4.4"
     execa "^5.0.0"
@@ -103,7 +103,7 @@
     "@commitlint/types" "^18.4.4"
     semver "7.5.4"
 
-"@commitlint/lint@^18.4.4":
+"@commitlint/lint@^18.5.0":
   version "18.5.0"
   resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-18.5.0.tgz#83c7434e969d04aaa84c5129c17b3dcde33d4650"
   integrity sha512-4VbfTGTZf/aDaOn+vednMQFu5EIKfERvv7j8La3etQCra0O2QMrZL28xugTroYekawpTkiWWvLswtpVfabIbgw==
@@ -113,7 +113,7 @@
     "@commitlint/rules" "^18.4.4"
     "@commitlint/types" "^18.4.4"
 
-"@commitlint/load@>6.1.1", "@commitlint/load@^18.4.4":
+"@commitlint/load@>6.1.1", "@commitlint/load@^18.5.0":
   version "18.5.0"
   resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-18.5.0.tgz#b14eef9306c2500594d8a7f1e4a8d68cb2562439"
   integrity sha512-vpyGgk7rzbFsU01NVwPNC/WetHFP0EwSYnQ1R833SJFHkEo+cWvqoVlw/VoZwBMoI6sF5/lwEdKzFDr1DHJ6+A==
@@ -6519,6 +6519,7 @@ wordwrap@^1.0.0:
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
