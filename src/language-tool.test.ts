@@ -42,12 +42,12 @@ describe('custom markup', async () => {
     });
 
     test('regexopt 1', async() => {
-      let s = '::: ' + 'A'.repeat(999) + ':::'
+      const s = '::: ' + 'A'.repeat(999) + ':::'
       expect(customMarkdownInterpreter(s)).toBe('# ');
     });
 
     test('regexopt 2', async() => {
-      let s = '::: ' + 'A'.repeat(1000) + ":::"
+      const s = '::: ' + 'A'.repeat(1000) + ":::"
       expect(customMarkdownInterpreter(s)).toBe('');
     });
 
