@@ -62,8 +62,9 @@ remarkBuilderOptions.interpretmarkup = customMarkdownInterpreter;
 const inlineCommentStartRe =
   /(<!--\s*languagetool-(disable-file|enable-file|disable-line|disable-next-line|configure-file))(?:\s|-->)/gi;
 const configFileStartRe =
-  /^\s*(languagetool-)?(?<command>disable|enable)(?<parameter>(\s+([A-Z_0-9]+)(\([^)]+\))?)+)/gi;
-const inlineCommentRuleRe = /\s*([A-Z_0-9]+)(\((.+?)\))?/gi;
+  /^\s*(languagetool-)?(?<command>disable|enable)(?<parameter>(\s+([A-Z_0-9]+)(\((.+?)\))?)+)/gi;
+const inlineCommentRuleRe = /^\s*(?<name>[A-Z][A-Z_0-9]*)(?<param>\(([^()]+)\))?/i;
+
 let enabledRules: Record<string, boolean> = {};
 let enabledRulesPerLineNumber: Record<number, Record<string, boolean>> = {};
 
@@ -287,15 +288,18 @@ export function applyEnableDisable(
   state: Record<string, boolean>
 ) {
   state = { ...state };
-  const trimmed = parameter && parameter.trim();
+  let trimmed = parameter && parameter.trim();
 
   let match: RegExpExecArray | null;
   while ((match = inlineCommentRuleRe.exec(trimmed))) {
-    let key = match[1].toUpperCase();
-    if (match[2]) {
-      key = key + match[2];
+    // ts-ignore
+    const groups = match.groups || {};
+    let key = groups['name'].toUpperCase();
+    if (groups['param']) {
+      key = key + groups['param'];
     }
     state[key] = enabled;
+    trimmed = trimmed.substring(match[0].length)
   }
   return state;
 }
