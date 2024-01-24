@@ -1,6 +1,6 @@
 import { applyEnableDisable, customMarkdownInterpreter } from './language-tool';
 
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test } from 'vitest';
 
 describe('custom markup', async () => {
     test('Test empty string', async () => {
