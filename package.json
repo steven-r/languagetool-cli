@@ -51,7 +51,7 @@
     "axios": "1.6.7",
     "commander": "11.1.0",
     "concurrent-queue": "7.0.2",
-    "find-up": "6.3.0",
+    "find-up": "7.0.0",
     "mdast-util-directive": "3.0.0",
     "micromark-extension-directive": "3.0.0",
     "qs": "6.11.2",
