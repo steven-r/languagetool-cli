@@ -30,7 +30,7 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "11.0.2",
     "@semantic-release/release-notes-generator": "12.1.0",
-    "@types/node": "20.11.16",
+    "@types/node": "20.12.9",
     "@types/node-fetch": "2.6.11",
     "@types/qs": "6.9.11",
     "@typescript-eslint/eslint-plugin": "5.62.0",
