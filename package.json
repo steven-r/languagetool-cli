@@ -49,7 +49,7 @@
   "dependencies": {
     "annotatedtext": "1.2.0",
     "axios": "1.6.5",
-    "commander": "11.1.0",
+    "commander": "12.1.0",
     "concurrent-queue": "7.0.2",
     "find-up": "6.3.0",
     "mdast-util-directive": "3.0.0",
