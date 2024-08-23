@@ -2,5 +2,35 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "dependencyDashboard": true,
+  "labels": [
+    "dependencies"
+  ],
+  "packageRules": [
+    {
+      "matchPaths": [
+        "*"
+      ],
+      "lockFileMaintenance": {
+        "enabled": true
+      }
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "addLabels": [
+        "java-typescript"
+      ]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "addLabels": [
+      "security"
+    ],
+    "assignees": [
+      "@crapstone"
+    ]
+  }
 }
