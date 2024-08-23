@@ -53,7 +53,7 @@
     "concurrent-queue": "7.0.2",
     "find-up": "6.3.0",
     "mdast-util-directive": "3.0.0",
-    "micromark-extension-directive": "3.0.0",
+    "micromark-extension-directive": "3.0.1",
     "qs": "6.11.2",
     "remark-directive": "3.0.0",
     "remark-frontmatter": "5.0.0",
