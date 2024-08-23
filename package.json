@@ -47,7 +47,7 @@
     "vitest": "2.0.5"
   },
   "dependencies": {
-    "annotatedtext": "1.2.0",
+    "annotatedtext": "1.2.1",
     "axios": "1.6.5",
     "commander": "12.1.0",
     "concurrent-queue": "7.0.2",
