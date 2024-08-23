@@ -40,7 +40,7 @@
     "eslint": "8.57.0",
     "husky": "9.1.5",
     "is-ci": "3.0.1",
-    "prettier": "3.2.4",
+    "prettier": "3.3.3",
     "semantic-release": "24.1.0",
     "ts-node": "10.9.2",
     "vite": "5.4.2",
