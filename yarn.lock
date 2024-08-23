@@ -1288,10 +1288,10 @@ ajv@^8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-annotatedtext@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/annotatedtext/-/annotatedtext-1.2.0.tgz#84827319eed6d9e8524582ab105f583650ee44c5"
-  integrity sha512-uhLbk4zioDnhi3u8/Rb9JoM2c/kTu46OTOHuIIQbyOU1x6NfJAjvijuD4gbZk5owrL9p8a03Lprmcrl3/157Ug==
+annotatedtext@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/annotatedtext/-/annotatedtext-1.2.1.tgz#03ad9fff402ea725fd4320d126d23f697acdb394"
+  integrity sha512-uYCdJRikI8DaMLtDGpBfUUf4fs1422zk8mwJ59ALvF/ubhtIDFHoIOToxJc7QEPGptfK20x6s64z/TgUDNkAQg==
 
 ansi-escapes@^4.2.1:
   version "4.3.2"
