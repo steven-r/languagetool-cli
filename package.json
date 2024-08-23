@@ -62,7 +62,7 @@
     "typescript": "5.3.3",
     "vfile": "6.0.2",
     "vfile-location": "5.0.2",
-    "vfile-reporter": "8.1.0",
+    "vfile-reporter": "8.1.1",
     "winston": "3.11.0"
   },
   "commitlint": {
