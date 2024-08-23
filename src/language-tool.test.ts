@@ -1,12 +1,57 @@
 import { applyEnableDisable, customMarkdownInterpreter } from './language-tool';
 
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test } from 'vitest';
 
 describe('custom markup', async () => {
     test('Test empty string', async () => {
         expect(customMarkdownInterpreter('')).toBe('');
       });
-});
+
+    test('newlines', async() => {
+      expect(customMarkdownInterpreter('\n\nTest\n\n')).toBe('\n\n\n\n');
+    });
+
+    // enumerations
+    test('numbers 1', async() => {
+      expect(customMarkdownInterpreter('Some Text\n1. ')).toBe('\n** ');
+    });
+
+    test('numbers 2', async() => {
+      expect(customMarkdownInterpreter('Some Text\n2. ')).toBe('\n** ');
+    });
+
+    test('numbers 10', async() => {
+      expect(customMarkdownInterpreter('Some Text\n10. ')).toBe('\n** ');
+    });
+
+    test('numbers 2000', async() => {
+      expect(customMarkdownInterpreter('2000. ')).toBe('** ');
+    });
+
+    test('numbers 10000', async() => {
+      expect(customMarkdownInterpreter('Some Text\n10000. ')).toBe('\n');
+    });
+
+    // block comments
+    test('blockcomment simple', async() => {
+      expect(customMarkdownInterpreter(':: Test ::')).toBe('# ');
+    });
+
+    test('blockcomment simple2', async() => {
+      expect(customMarkdownInterpreter(':::::: Test ::::')).toBe('# ');
+    });
+
+    test('regexopt 1', async() => {
+      const s = '::: ' + 'A'.repeat(999) + ':::'
+      expect(customMarkdownInterpreter(s)).toBe('# ');
+    });
+
+    test('regexopt 2', async() => {
+      const s = '::: ' + 'A'.repeat(1000) + ":::"
+      expect(customMarkdownInterpreter(s)).toBe('');
+    });
+
+  });
 
 describe("comment parsing", async () => {
   test('applyEnableDisable - keep empty', async () => {
