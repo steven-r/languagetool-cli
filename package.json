@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "semantic-release": "semantic-release",
-    "prepare": "is-ci || husky install",
+    "prepare": "husky",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "vitest"
