@@ -32,22 +32,22 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
-    "@types/node": "20.16.5",
+    "@types/node": "20.16.11",
     "@types/node-fetch": "2.6.11",
     "@types/qs": "6.9.16",
-    "@typescript-eslint/eslint-plugin": "8.6.0",
-    "@typescript-eslint/parser": "8.6.0",
-    "commitizen": "4.3.0",
+    "@typescript-eslint/eslint-plugin": "8.8.1",
+    "@typescript-eslint/parser": "8.8.1",
+    "commitizen": "4.3.1",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "9.11.0",
+    "eslint": "9.12.0",
     "husky": "9.1.6",
     "is-ci": "3.0.1",
     "lint-staged": "^15.2.9",
     "prettier": "3.3.3",
-    "semantic-release": "24.1.1",
+    "semantic-release": "24.1.2",
     "ts-node": "10.9.2",
-    "vite": "5.4.6",
-    "vitest": "2.1.1"
+    "vite": "5.4.8",
+    "vitest": "2.1.2"
   },
   "dependencies": {
     "annotatedtext": "1.2.1",
@@ -62,11 +62,11 @@
     "remark-frontmatter": "5.0.0",
     "remark-gfm": "4.0.0",
     "remark-parse": "11.0.0",
-    "typescript": "5.6.2",
+    "typescript": "5.6.3",
     "vfile": "6.0.3",
     "vfile-location": "5.0.3",
     "vfile-reporter": "8.1.1",
-    "winston": "3.14.2"
+    "winston": "3.15.0"
   },
   "commitlint": {
     "extends": [
